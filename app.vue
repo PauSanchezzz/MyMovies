@@ -1,6 +1,6 @@
 <template>
   <div>
+    <Button label="Check" icon="pi pi-check" />
     <NuxtRouteAnnouncer />
-    <NuxtWelcome />
   </div>
 </template>
