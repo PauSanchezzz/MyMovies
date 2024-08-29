@@ -3,4 +3,14 @@
 
 * {
   font-family: "Raleway", sans-serif;
+  --scrollbar-color-track: none;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #b391d6;
+  border-radius: 50px;
 }
