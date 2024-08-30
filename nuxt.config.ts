@@ -18,4 +18,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  app: {
+    head: {
+      title: "My Movies",
+    },
+  },
 });
