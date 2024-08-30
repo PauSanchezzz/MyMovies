@@ -10,11 +10,14 @@ const isSearchActive = ref(false);
 const isSearchEmpty = ref(false);
 const isResultEmpty = ref(false);
 
+const runtimeConfig = useRuntimeConfig()
+const apiKey = runtimeConfig.public.apiKey
+
 const { data, error } = useFetch<ApiResponse>('https://api.themoviedb.org/3/discover/movie', {
   lazy: true,
   query: { include_adult: false, include_video: false, language: 'es-MX', page: 1, sort_by: 'popularity.desc' },
   headers: {
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTc2ODIzMmQxMDU1NDNkOTRlNTA2MGRiZjdjZDI0NyIsIm5iZiI6MTcyNDg5MTAyNC4yNTEzODMsInN1YiI6IjY2Y2ZiZGNiYmZiOTg3YWEzMmUyZmI1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZrPcQ3ZPCPlOLkLoK8M1R5jQJiSsaTLhJRFe70sPadU`,
+    Authorization: `Bearer ${apiKey}`,
   }
 })
 
@@ -73,7 +76,7 @@ function resertHandleEmptyResult() {
   </div>
 
   <div class="image-container">
-    <img class="image-introduction" src="../public/images/cinema.jpg" alt="">
+    <img class="image-introduction" src="/images/cinema.jpg" alt="">
     <p class="overlay-text">¡Sumérgete en el mundo del cine!<br><b>Encuentra la película perfecta para cada
         momento.</b>
     </p>

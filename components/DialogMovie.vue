@@ -4,12 +4,14 @@ import { ref, defineProps, watch } from "vue";
 
 const visible = ref(false);
 const movieData = ref<MovieDetails | null>(null);
+const runtimeConfig = useRuntimeConfig()
+const apiKey = runtimeConfig.public.apiKey
 
 const loadMovieData = async (id: number) => {
   const { data, error } = await useFetch<MovieDetails>(`https://api.themoviedb.org/3/movie/${id}`, {
     query: { include_adult: false, include_video: false, language: 'es-MX', page: 1, sort_by: 'popularity.desc' },
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTc2ODIzMmQxMDU1NDNkOTRlNTA2MGRiZjdjZDI0NyIsIm5iZiI6MTcyNDg5MTAyNC4yNTEzODMsInN1YiI6IjY2Y2ZiZGNiYmZiOTg3YWEzMmUyZmI1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZrPcQ3ZPCPlOLkLoK8M1R5jQJiSsaTLhJRFe70sPadU`,
+      Authorization: `Bearer ${apiKey}`,
     }
   });
 
@@ -44,7 +46,6 @@ watch(() => movieData.value, (newMovieData) => {
     emptyStars.value = 5 - fullStars.value;
   }
 });
-
 </script>
 
 <template>
@@ -52,7 +53,7 @@ watch(() => movieData.value, (newMovieData) => {
     <Dialog v-model:visible="visible" modal :header="movieData?.title" @hide="closeDialog"
       :style="{ width: '75vw', padding: 0, background: '#f9f3ff' }"
       :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
-      <div class="container-dialog">
+      <div class="container-dialog m-0">
         <img class="img-movie-description" :src="`https://image.tmdb.org/t/p/w500${movieData.poster_path}`" alt="">
         <div class="description-movie">
           <h1 class="title-description">{{ movieData.title }}</h1>
@@ -60,8 +61,10 @@ watch(() => movieData.value, (newMovieData) => {
             <b>Duración:</b> {{ movieData.runtime }} minutos |
             <b>Fecha de Estreno:</b> {{ movieData.release_date }}
           </p>
+
           <p class="text-description">{{ movieData.overview === "" ? "Sin descripción." : movieData.overview }}</p>
           <p class="subtitle-description">Género:</p>
+
           <div class="genres-movie">
             <div v-for="genre in movieData.genres" :key="genre.id">
               <p class="genre-movie">{{ genre.name }}</p>
@@ -70,9 +73,9 @@ watch(() => movieData.value, (newMovieData) => {
 
           <p class="subtitle-description">Calificación:</p>
           <div class="calification-movie">
-            <i v-for="n in fullStars" :key="'full-' + n" class="pi pi-star-fill"
+            <i v-for="star in fullStars" :key="`full-${star}`" class="pi pi-star-fill"
               style="font-size: 2rem; margin-right: 0.5rem; color: #efcd25;"></i>
-            <i v-for="n in emptyStars" :key="'empty-' + n" class="pi pi-star"
+            <i v-for="star in emptyStars" :key="`full-${star}`" class="pi pi-star"
               style="font-size: 2rem; margin-right: 0.5rem; color: #efcd25;"></i>
             <p>{{ rating.toFixed(1) }}/10</p>
           </div>
@@ -85,14 +88,20 @@ watch(() => movieData.value, (newMovieData) => {
 <style scoped>
 .img-movie-description {
   height: 550px;
-  width: 450px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .container-dialog {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  place-content: center;
-  place-items: center;
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem;
+  align-items: center;
+  justify-content: center
+}
+
+.title-description {
+  text-wrap: wrap;
 }
 
 .text-description {
@@ -106,18 +115,22 @@ watch(() => movieData.value, (newMovieData) => {
 
 .genres-movie {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .genre-movie {
   background-color: #d4c2ec;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 0 200px;
 }
 
 .information-movie {
   font-size: 1.2rem;
   padding: 2rem 0;
+  text-wrap: wrap;
 }
 
 .calification-movie {
@@ -131,14 +144,21 @@ watch(() => movieData.value, (newMovieData) => {
   font-weight: bold;
 }
 
-.description-movie {
-  padding: 1.5rem;
-}
-
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 1023px) {
   .img-movie-description {
-    height: 300px;
-    width: 250px;
+    height: 350px;
+    width: 100%;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  .container-dialog {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .text-description {
+    text-align: left;
   }
 }
 </style>
