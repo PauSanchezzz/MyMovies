@@ -1,75 +1,66 @@
-# Nuxt 3 Minimal Starter
+# 🎬 My Movies
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## 📖 Descripción
 
-## Setup
+**My Movies** es una aplicación web desarrollada en Vue.js utilizando Nuxt y PrimeVue. La aplicación permite a los usuarios buscar películas por título usando la API de TMDb, mostrando detalles básicos de las películas y, al seleccionarlas, información más detallada.
 
-Make sure to install the dependencies:
+## 🌟 Características
 
-```bash
-# npm
-npm install
+- 🔍 **Búsqueda por título**: Permite a los usuarios buscar películas introduciendo el nombre en la barra de búsqueda.
+- 🎥 **Lista de resultados**: Muestra una lista de películas que coinciden con el término de búsqueda, incluyendo detalles como el título y el año de lanzamiento.
+- 📝 **Información detallada**: Al hacer clic en una película, se muestra un diálogo modal con información detallada sobre la misma.
+- ⚙️ **Manejo de estados**: La aplicación maneja estados de carga, éxito y error:
+  - ⏳ Muestra un indicador de carga mientras se obtienen los datos.
+  - ❌ Muestra un mensaje de error si no se encuentran resultados o hay un problema con la API.
+  - 🛠️ Maneja entradas vacías o incorrectas en el campo de búsqueda.
 
-# pnpm
-pnpm install
+## 💻 Tecnologías Utilizadas
 
-# yarn
-yarn install
+- **Vue.js**: Framework JavaScript para la construcción de interfaces de usuario.
+- **Nuxt.js**: Framework basado en Vue.js para crear aplicaciones universales.
+- **PrimeVue**: Biblioteca de componentes UI para Vue.js.
+- **CSS**: Estilos personalizados para la aplicación.
+- **TMDb API**: API utilizada para obtener los datos de las películas.
 
-# bun
-bun install
-```
+## 🔧 Requisitos Previos
 
-## Development Server
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
-Start the development server on `http://localhost:3000`:
+- 🟢 Node.js
+- 🟠 npm
+- 🔑 Una clave API gratuita de TMDb (puedes obtenerla registrándote en [TMDb](https://www.themoviedb.org/)).
 
-```bash
-# npm
-npm run dev
+## 🚀 Instalación
 
-# pnpm
-pnpm run dev
+Sigue estos pasos para clonar y ejecutar la aplicación en tu máquina local:
 
-# yarn
-yarn dev
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/PauSanchezzz/MyMovies.git
+   ```
 
-# bun
-bun run dev
-```
+2. **Entrar al directorio del proyecto**:
+   ```bash
+   cd MyMovies
+   ```
 
-## Production
+3. **Instalar las dependencias**:
+   ```bash
+   npm install
+   ```
 
-Build the application for production:
+4. **Configurar la clave API**:
+   
+   Crear archivo `.env` siguiendo la estructura definida en `.env.example `, se debe agregar la API KEY.
 
-```bash
-# npm
-npm run build
+4. **Ejecutar la aplicación en modo de desarrollo**:
+   ```bash
+   npm run dev
 
-# pnpm
-pnpm run build
+## 🎯 Uso
 
-# yarn
-yarn build
+1. **Buscar películas**:
+   - Introduce el título de una película en la barra de búsqueda y presiona Enter o haz clic en el botón de búsqueda.
 
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+2. **Ver detalles de una película**:
+   - Haz clic en una película de la lista de resultados para ver información detallada en un diálogo modal.

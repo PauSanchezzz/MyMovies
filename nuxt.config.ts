@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import Aura from "@primevue/themes/aura";
+import Lara from "@primevue/themes/lara";
 
 export default defineNuxtConfig({
   css: ["~/assets/styles/main.css"],
@@ -9,13 +9,18 @@ export default defineNuxtConfig({
   primevue: {
     options: {
       theme: {
-        preset: Aura,
+        preset: Lara,
         options: {
           prefix: "p",
           darkModeSelector: "light",
           cssLayer: false,
         },
       },
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiKey: process.env.API_KEY,
     },
   },
   app: {
