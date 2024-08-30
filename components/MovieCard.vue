@@ -37,4 +37,7 @@ const props = defineProps({
   transition: 0.3s;
   scale: 1.1;
 }
+.movie-card{
+  background: #f9f3ff
+}
 </style>
