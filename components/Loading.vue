@@ -13,11 +13,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 40vh;
   width: 100vw;
 }
 
-.title-loading{
+.title-loading {
   color: #41106d;
   font-size: 1.2rem;
   font-weight: bold;
@@ -27,7 +27,7 @@
 .lds-ellipsis,
 .lds-ellipsis div {
   box-sizing: border-box;
-  
+
 }
 
 .lds-ellipsis {
